@@ -4,7 +4,7 @@ import "./row.css";
 
 const baseUrl = "https://image.tmdb.org/t/p/original/";
 
-function Row({title, fetchUrl}) {
+function Row({title, fetchUrl, isLargerRow}) {
     const [movies, setMovies] = useState([]);
 
     //A snippet of code that runs based on specific condition/variable
@@ -28,8 +28,9 @@ function Row({title, fetchUrl}) {
             {/* several row--posters */}
             {movies.map(movie => (
                 <img
-                className="row_poster" 
-                src={`${baseUrl}${movie.poster_path}`} alt={movie.name} />
+                key={movie.id}
+                className={`row_poster ${isLargerRow && `row_posterLarge`}`}
+                src={`${baseUrl}${isLargerRow ? movie.poster_path : movie.backdrop_path}`} alt={movie.name} />
             ))}
             </div>
 
